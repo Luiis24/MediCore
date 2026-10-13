@@ -2,6 +2,7 @@
 
 **Sistema web de gestión clínica básica**: pacientes, citas médicas e historias clínicas, con un dashboard de métricas. Construido con **ASP.NET Core 8 (MVC)**, **Entity Framework Core** y **SQLite**, y desplegado con **Docker en Render**.
 
+<img width="1366" height="633" alt="image" src="https://github.com/user-attachments/assets/03f4c043-513d-4ac6-be3b-a36d19fb1189" />
 🌐 **Demo en vivo:** [https://medicore-304b.onrender.com/](https://medicore-304b.onrender.com/)
 
 > ⏱️ Si el servicio está en un plan gratuito de Render, la primera carga puede tardar unos segundos mientras el contenedor "despierta".
