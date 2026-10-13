@@ -1,0 +1,63 @@
+@model IEnumerable<MediCore.Models.Patient>
+
+@{
+    ViewData["Title"] = "Gestión de Pacientes";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Directorio de Pacientes</h1>
+    <a asp-action="Create" class="btn btn-primary"><i class="bi bi-person-plus-fill me-1"></i> Nuevo Paciente</a>
+</div>
+
+<!-- Buscador en tiempo real -->
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form asp-controller="Patients" asp-action="Index" method="get" class="input-group">
+            <input type="text" name="searchString" class="form-control" placeholder="Buscar por nombre o documento..." />
+            <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i> Buscar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Tabla de Pacientes -->
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Edad</th>
+                        <th>Género</th>
+                        <th>Diagnóstico Principal</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><strong>@item.Name</strong></td>
+                            <td>@item.DocumentNumber</td>
+                            <td>@item.Age</td>
+                            <td>@item.Gender</td>
+                            <td>@item.Diagnosis</td>
+                            <td>
+                                <span class="badge @(item.Status == "Activo" ? "bg-success" : "bg-secondary")">
+                                    @item.Status
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Ver Historia Clínica">
+                                    <i class="bi bi-file-medical"></i> Historia
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

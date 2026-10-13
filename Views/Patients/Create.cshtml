@@ -1,0 +1,66 @@
+@model MediCore.Models.Patient
+
+@{
+    ViewData["Title"] = "Registrar Nuevo Paciente";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Registrar Nuevo Paciente</h1>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Volver</a>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Nombre Completo</label>
+                        <input asp-for="Name" class="form-control" placeholder="Ej. Carlos Pérez" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="DocumentNumber" class="form-label">Número de Documento</label>
+                        <input asp-for="DocumentNumber" class="form-control" placeholder="Ej. 11223344" />
+                        <span asp-validation-for="DocumentNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Age" class="form-label">Edad</label>
+                            <input asp-for="Age" type="number" class="form-control" placeholder="Ej. 30" />
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Gender" class="form-label">Género</label>
+                            <select asp-for="Gender" class="form-select">
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Diagnosis" class="form-label">Diagnóstico Principal</label>
+                        <textarea asp-for="Diagnosis" class="form-control" rows="2" placeholder="Diagnóstico base..."></textarea>
+                        <span asp-validation-for="Diagnosis" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label">Estado</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="Activo">Activo</option>
+                            <option value="Inactivo">Inactivo</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save me-1"></i> Guardar Paciente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

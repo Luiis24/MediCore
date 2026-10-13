@@ -1,0 +1,69 @@
+@model MediCore.Models.Patient
+
+@{
+    ViewData["Title"] = "Historia Clínica - " + Model.Name;
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Expediente Médico: @Model.Name</h1>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Volver al
+        listado</a>
+    </div>
+
+    <div class="row">
+        <!-- Información General del Paciente -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-person-badge me-2"></i>Datos Demográficos</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Documento:</strong> @Model.DocumentNumber</p>
+                    <p><strong>Edad:</strong> @Model.Age años</p>
+                    <p><strong>Género:</strong> @Model.Gender</p>
+                    <p><strong>Diagnóstico Base:</strong> <span class="text-danger fw-bold">@Model.Diagnosis</span></p>
+                    <p><strong>Estado:</strong> <span class="badge bg-success">@Model.Status</span></p>
+                    <p><strong>Registro:</strong> @Model.RegistrationDate.ToString("yyyy-MM-dd")</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evoluciones e Historia Clínica -->
+        <div class="col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-header py-3">
+                    <h5 class="mb-0 fw-bold text-primary"><i class="bi bi-journal-medical me-2"></i>Evoluciones Clínicas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.MedicalRecords != null && Model.MedicalRecords.Any())
+                    {
+                        <div class="accordion" id="accordionRecords">
+                            @foreach (var record in Model.MedicalRecords.OrderByDescending(r => r.RecordDate))
+                            {
+                                <div class="accordion-item mb-2 border">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse_@record.Id">
+                                            Fecha: @record.RecordDate.ToString("yyyy-MM-dd HH:mm") &nbsp;|&nbsp; <em>Atendido por:
+                                            @record.DoctorName</em>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse_@record.Id" class="accordion-collapse collapse"
+                                         data-bs-parent="#accordionRecords">
+                                        <div class="accordion-body">
+                                            <p class="mb-0"><strong>Notas de Evolución:</strong> @record.Notes</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No hay evoluciones clínicas registradas para este paciente.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,47 @@
+@model MediCore.Models.Appointment
+
+@{
+    ViewData["Title"] = "Programar Cita Médica";
+}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Programar Cita Médica</h1>
+    <a asp-action="Index" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-left"></i> Volver</a>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <form asp-action="CreateAppointment">
+                    <div class="mb-3">
+                        <label class="form-label">Seleccionar Paciente</label>
+                        <select asp-for="PatientId" class="form-select" asp-items="@(new SelectList(ViewBag.Patients, "Id", "Name"))">
+                            <option value="">-- Seleccione un paciente --</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="AppointmentDate" class="form-label">Fecha y Hora de la Cita</label>
+                        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Reason" class="form-label">Motivo de la Consulta</label>
+                        <textarea asp-for="Reason" class="form-control" rows="2" placeholder="Ej. Control periódico..."></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label">Estado Inicial</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="Programada">Programada</option>
+                            <option value="Completada">Completada</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-calendar-plus me-1"></i> Programar Cita</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
