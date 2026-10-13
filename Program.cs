@@ -15,6 +15,12 @@ builder.Services.AddControllersWithViews()
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate(); // Esto crea la base de datos y aplica las tablas automáticamente en producción
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
